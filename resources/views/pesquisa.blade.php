@@ -7,12 +7,12 @@
             <div class="bg-transparent shadow-sm">
                 <div class="container mx-auto">
 
-                    <div class="grid md:grid-cols-3 gap-4">
+                    <div class="flex justify-center items-center gap-4">
 
                         @if($posts->isEmpty())
                         <div class="flex justify-center justify-self-center" >
-                            <div class="text-start text-white">
-                                <p>Ainda não temos nenhum post cadastrado sobre este assunto :(</p>
+                            <div class="text-center text-white">
+                                <p class="text-center text-white">Ainda não temos nenhum post cadastrado sobre este assunto :(</p>
                             </div>
                         </div>
                            

@@ -43,21 +43,49 @@
                                 <div>
                                     <img class="w-6rem h-6rem ml-4rem rounded-full" src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&background=FC9A03&color=ffffff" alt="Avatar">
                                 </div>
+
                                 <div class="ml-4 md:ml-4 text-bold sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0 mt-2 text-center">
-                                    <div class="sm:text-left md:text-left lg:text-left xl:text-left text-center font-bold text-2xl">{{ Auth::user()->name }}</div>
-                                    <div class="text-semibold text-sm text-gray sm:text-left md:text-left lg:text-left xl:text-left text-center">
-                                        <span>@</span>{{ Auth::user()->username }}
+                                    <div class="flex items-center">
+
+                                        <div class="sm:text-left md:text-left lg:text-left xl:text-left text-center font-bold text-2xl">{{ Auth::user()->name }}</div>
+
+                                    
+                                        <x-dropdown align="left" width="48">
+                                                            <x-slot name="trigger">
+                                                                <button>
+                                                                    <img class="w-5 h-5 ml-4 mt-3 " src="{{ asset('imagens/points.png') }}" alt="seta">
+                                                                </button>
+                                                            </x-slot>
+
+                                                            @foreach($posts as $post)
+
+                                                            <div class="absolute z-50">
+                                                                <x-slot name="content" class="rounded-xl absolute z-50">
+
+                                                                <x-dropdown-link>
+                                                                    <a href="{{ route('profile.edit', $post->id) }}" class="text-purplle ml-4 text-sm btn btn-primary font-semibold flex justify-start">Editar</a>
+
+                                                                </x-dropdown-link>
+
+                                                                <x-dropdown-link >
+                                                                    <a href="{{ route('favorites.index') }}" class="text-orange ml-4 text-sm btn btn-primary font-semibold flex justify-start mb-4">Ver Posts Favoritados</a>
+                                                                </x-dropdown-link>
+
+                                                                </x-slot>
+                                                            </div>
+                                                            @endforeach
+
+                                        </x-dropdown>
+                                    
                                     </div>
-                                    <div class="text-semibold text-sm text-gray sm:text-left md:text-left lg:text-left xl:text-left text-center">
-                                        {{ $postCount }} Postagens
-                                    </div>
-                                    <div class="md:flex mt-2">
-                                        
-                                        <div class="md:mr-4">
-                                            <a href="{{ route('profile.edit') }}" class="block text-semibold text-gray text-sm">Editar perfil</a>
+                                    
+
+                                    <div>
+                                        <div class="text-semibold text-sm text-gray sm:text-left md:text-left lg:text-left xl:text-left">
+                                            <span>@</span>{{ Auth::user()->username }}
                                         </div>
-                                        <div>
-                                            <a href="{{ route('favorites.index') }}" class="block text-semibold text-gray text-sm">Ver Posts Favoritados</a>
+                                        <div class="text-semibold text-sm text-gray sm:text-left md:text-left lg:text-left xl:text-left text-center">
+                                            {{ $postCount }} Postagens
                                         </div>
                                     </div>
                                 </div>
@@ -85,33 +113,33 @@
 
                                             <div class="text-purplle flex-grow relative">
                                            
-                                            <x-dropdown align="left" width="48" class="">
-                                                <x-slot name="trigger">
-                                                    <button>
-                                                        <img class="w-5 h-5 m-4 min-w-5 min-h-5" src="{{ asset('imagens/points.png') }}" alt="seta">
-                                                    </button>
-                                                </x-slot>
-                            
-                                                <div class="absolute z-50">
-                                                    <x-slot name="content" class="rounded-xl absolute z-50">
+                                                    <x-dropdown align="left" width="48" class="">
+                                                        <x-slot name="trigger">
+                                                            <button>
+                                                                <img class="w-5 h-5 m-4 min-w-5 min-h-5" src="{{ asset('imagens/points.png') }}" alt="seta">
+                                                            </button>
+                                                        </x-slot>
+                                
+                                                        <div class="absolute z-50">
+                                                            <x-slot name="content" class="rounded-xl absolute z-50">
 
-                                                    <x-dropdown-link>
-                                                        <a href="{{ route('posts.edit', $post->id) }}" class="ml-4 text-sm btn btn-primary font-semibold">Editar</a>
+                                                            <x-dropdown-link>
+                                                                <a href="{{ route('posts.edit', $post->id) }}" class="ml-4 text-sm btn btn-primary font-semibold">Editar</a>
 
-                                                    </x-dropdown-link>
+                                                            </x-dropdown-link>
 
-                                                    <x-dropdown-link >
-                                                        <form action="{{ route('posts.destroy', $post->id) }}" method="post">
-                                                                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="text-orange font-semibold text-sm mb-2" type="submit" onclick="return confirm('Tem certeza que deseja deletar este post?')">Excluir</button>
-                                                        </form>
-                                                    </x-dropdown-link>
+                                                            <x-dropdown-link >
+                                                                <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+                                                                                                                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button class="text-orange font-semibold text-sm mb-2" type="submit" onclick="return confirm('Tem certeza que deseja deletar este post?')">Excluir</button>
+                                                                </form>
+                                                            </x-dropdown-link>
 
-                                                    </x-slot>
-                                                </div>
-                                               
-                                            </x-dropdown>
+                                                            </x-slot>
+                                                        </div>
+
+                                                </x-dropdown>
                                             </div>
 
                                         </div>
